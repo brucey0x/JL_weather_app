@@ -1,0 +1,21 @@
+{
+    "name": "jl_weather_app",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "tsc --noEmit",
+        "prebuild": "rm -rf ./build/*",
+        "build": "tsc && ncp ./public/ ./build/",
+        "dev": "tsc-watch --onSuccess \"node ./build/scripts/index.js\""
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "ncp": "^2.0.0",
+        "prettier": "^3.0.3",
+        "tsc-watch": "^6.0.4",
+        "typescript": "^5.2.2"
+    }
+}
