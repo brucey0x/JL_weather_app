@@ -28,3 +28,5 @@ I'm going to use Typescript for the first time and try some basic typing.
 -   [ ] Get Unsplash image URL to insert in the right element so that the other elements remain visible.
 
 -   [ ] Make search query also update the Unsplash API call.
+
+-   [ ] Move API key to separate file that's included in `.gitignore` and that I filter from the repo that I've already pushed.
