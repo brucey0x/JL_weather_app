@@ -9,7 +9,6 @@ export function getCoordinates(city: string) {
             if (!response.ok) {
                 throw new Error("Network error")
             }
-            console.log(response.json)
             return response.json()
         })
         .then(function (jsonData) {
@@ -20,7 +19,7 @@ export function getCoordinates(city: string) {
             console.log(
                 `Coordinates are lat: ${coordinates[0]}, lon: ${coordinates[1]}`
             )
-            return coordinates
+            return getWeather(coordinates)
         })
         .catch((error) => {
             console.error(
@@ -30,4 +29,31 @@ export function getCoordinates(city: string) {
         })
 }
 
-export function getWeather(coordinates: [lat: number, lon: number]) {}
+export function getWeather(coordinates: [lat: number, lon: number]) {
+    console.log(`Coordinates are ${coordinates}`)
+
+    let owWeatherApiEndpoint2 = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates[0]}&lon=${coordinates[1]}&units=metric&appid=${openWeatherApiKey}`
+    console.log(`Weather Endpoint 2.5 is ${owWeatherApiEndpoint2}`)
+
+    // let owWeatherApiEndpoint3 = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates[0]}&lon=${coordinates[1]}&units=metric&exclude=hourly,daily&appid=${openWeatherApiKey}`
+    // console.log(`Weather Endpoint 3 is ${owWeatherApiEndpoint3}`)
+
+    fetch(owWeatherApiEndpoint2)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network error")
+            }
+            return response.json()
+        })
+        .then(function (jsonData) {
+            let currentTemp: string = jsonData.main.temp
+            console.log(`Current temperature is ${currentTemp}`)
+            return currentTemp
+        })
+        .catch((error) => {
+            console.error(
+                "There was a problem with the Fetch operation:",
+                error
+            )
+        })
+}

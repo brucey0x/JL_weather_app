@@ -20,7 +20,6 @@ searchBarElement?.addEventListener("keydown", (key: KeyboardEvent) => {
         let inputValue: string = (searchBarElement as HTMLInputElement).value
         search(inputValue)
         ;(searchBarElement as HTMLInputElement).value = ""
-        console.log(`search for ${inputValue} executed`)
     }
 })
 
@@ -29,13 +28,14 @@ searchBarButton?.addEventListener("click", () => {
         let inputValue: string = (searchBarElement as HTMLInputElement).value
         search(inputValue)
         ;(searchBarElement as HTMLInputElement).value = ""
-        console.log(`search for ${inputValue} executed`)
     }
 })
 
 // Create a function that searches the weather API. Need to export the search to pull the right Unsplash image for the background.
 function search(query: string) {
+    console.log(`Search for ${query} executed.`)
     upgradeBackgroundImage(query)
     if (cityElement) cityElement.innerText = `Weather in ${query}`
-    getCoordinates(query)
+    let currentTemp = getCoordinates(query)
+    if (tempElement) tempElement.innerText = `${currentTemp}° degrees`
 }
