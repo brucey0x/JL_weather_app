@@ -1,15 +1,16 @@
 // Read DOM
 
-const imageElement: any = document.querySelector(".unsplash-image")
-const imageLink = document.querySelector(".image-link")
-const creatorElement = document.querySelector(".image-creator")
+const imageElement: HTMLElement | null =
+    document.querySelector(".unsplash-image")
+const imageLink: HTMLElement | null = document.querySelector(".image-link")
+const creatorLink: HTMLElement | null = document.querySelector(".creator-link")
+const creatorElement: HTMLElement | null =
+    document.querySelector(".image-creator")
 
 /*
 Configure Unsplash API
 
 Documentation: https://unsplash.com/documentation#get-a-random-photo
-
-I got rate limited so need to try again.
 
 */
 
@@ -25,7 +26,13 @@ fetch(endpoint)
         return response.json()
     })
     .then(function (jsonData) {
-        imageElement.src = jsonData.urls.regular
+        if (imageElement)
+            imageElement.setAttribute("src", jsonData.urls.regular)
+        if (imageLink) imageLink?.setAttribute("href", jsonData.links.html)
+        if (creatorLink)
+            creatorLink?.setAttribute("href", jsonData.user.links.html)
+        if (creatorElement)
+            creatorElement.innerText = `Created by ${jsonData.user.name}`
     })
 
 // import { createApi } from "unsplash-js"

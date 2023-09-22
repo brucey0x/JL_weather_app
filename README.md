@@ -25,4 +25,6 @@ I'm going to use Typescript for the first time and try some basic typing.
 
 ## Todos
 
--   [] Get Unsplash
+-   [ ] Get Unsplash image URL to insert in the right element so that the other elements remain visible.
+
+-   [ ] Make search query also update the Unsplash API call.
