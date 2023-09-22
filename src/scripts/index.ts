@@ -37,5 +37,6 @@ function search(query: string) {
     upgradeBackgroundImage(query)
     if (cityElement) cityElement.innerText = `Weather in ${query}`
     let currentTemp = getCoordinates(query)
+    console.log(currentTemp)
     if (tempElement) tempElement.innerText = `${currentTemp}° degrees`
 }

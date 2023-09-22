@@ -17,7 +17,9 @@ export function getCoordinates(city: string) {
                 jsonData[0].lon
             ]
             console.log(
-                `Coordinates are lat: ${coordinates[0]}, lon: ${coordinates[1]}`
+                `Coordinates are lat: ${coordinates[0]}, lon: ${
+                    coordinates[1]
+                } and temp is ${getWeather(coordinates)}`
             )
             return getWeather(coordinates)
         })
@@ -46,8 +48,10 @@ export function getWeather(coordinates: [lat: number, lon: number]) {
             return response.json()
         })
         .then(function (jsonData) {
-            let currentTemp: string = jsonData.main.temp
-            console.log(`Current temperature is ${currentTemp}`)
+            let currentTemp: number = jsonData.main.temp
+            console.log(
+                `Current temperature is ${currentTemp} and currentTemp is type ${typeof currentTemp}.`
+            )
             return currentTemp
         })
         .catch((error) => {
