@@ -3,9 +3,20 @@ import { upgradeBackgroundImage } from "./unsplash_api.js"
 // Read DOM
 const searchBarElement: HTMLElement | null =
     document.querySelector(".search-bar")
-
 const searchBarButton: HTMLElement | null =
     document.querySelector(".search-bar-button")
+const cityElement: HTMLElement | null = document.querySelector(".city")
+const tempElement: HTMLElement | null = document.querySelector(".temp")
+const weatherDescriptionButton: HTMLElement | null = document.querySelector(
+    ".weather-description"
+)
+const humidityElement: HTMLElement | null = document.querySelector(".humidity")
+const windElement: HTMLElement | null = document.querySelector(".wind")
+
+// // focus on search bar upon page load.
+// window.addEventListener("load", () => {
+//     searchBarElement?.focus()
+// })
 
 // eventListeners
 searchBarElement?.addEventListener("keydown", (key: KeyboardEvent) => {
