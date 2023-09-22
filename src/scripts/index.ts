@@ -1,4 +1,5 @@
 import { upgradeBackgroundImage } from "./unsplash_api.js"
+import { getCoordinates } from "./openweather_api.js"
 
 // Read DOM
 const searchBarElement: HTMLElement | null =
