@@ -14,10 +14,12 @@ export function getCoordinates(city: string) {
         })
         .then(function (jsonData) {
             let coordinates: [lat: number, lon: number] = [
-                jsonData.lat,
-                jsonData.lon
+                jsonData[0].lat,
+                jsonData[0].lon
             ]
-            console.log(coordinates)
+            console.log(
+                `Coordinates are lat: ${coordinates[0]}, lon: ${coordinates[1]}`
+            )
             return coordinates
         })
         .catch((error) => {
@@ -27,3 +29,5 @@ export function getCoordinates(city: string) {
             )
         })
 }
+
+export function getWeather(coordinates: [lat: number, lon: number]) {}

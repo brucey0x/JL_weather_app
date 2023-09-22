@@ -1,5 +1,5 @@
-import { upgradeBackgroundImage } from "./unsplash_api.js"
 import { getCoordinates } from "./openweather_api.js"
+import { upgradeBackgroundImage } from "./unsplash_api.js"
 
 // Read DOM
 const searchBarElement: HTMLElement | null =
@@ -37,4 +37,5 @@ searchBarButton?.addEventListener("click", () => {
 function search(query: string) {
     upgradeBackgroundImage(query)
     if (cityElement) cityElement.innerText = `Weather in ${query}`
+    getCoordinates(query)
 }
