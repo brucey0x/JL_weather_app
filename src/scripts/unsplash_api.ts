@@ -23,7 +23,10 @@ export function upgradeBackgroundImage(searchQuery: string) {
     const apiEndpoint: string = `https://api.unsplash.com/photos/random?query=${searchQuery}&orientation=landscape&client_id=${clientID}`
 
     fetch(apiEndpoint)
-        .then(function (response) {
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network error")
+            }
             console.log(response.json)
             return response.json()
         })
@@ -41,6 +44,12 @@ export function upgradeBackgroundImage(searchQuery: string) {
             }
             if (creatorElement)
                 creatorElement.innerText = `Photo by ${jsonData.user.name}.`
+        })
+        .catch((error) => {
+            console.error(
+                "There was a problem with the Fetch operation:",
+                error
+            )
         })
 
     console.log(`Image is updated with query ${searchQuery}`)
