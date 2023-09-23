@@ -41,7 +41,11 @@ I'm incorporating the OpenWeather, Google Maps and Unsplash APIs.
 
 -   [x] Made dropdown selectable by clicking and pressing enter.
 
--   [ ] Move API key to separate file that's included in `.gitignore` and that I filter from the repo that I've already pushed.
+-   [ ] Move API key to separate file that's included in `.gitignore`
+
+-   [ ] Filter keys from GH repo that I'd already publicized.
+
+-   [ ] Add serverless API for all possible API calls and test them rigorously.
 
 ### Bugs
 

@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
         const weatherResponse = await fetch(weatherEndpoint)
         const weatherData = await weatherResponse.json()
 
-        res.json({ geoData, weatherData })
+        res.json(weatherData)
     } catch (error) {
         res.status(500).json({ error: "Failed to fetch weather data" })
     }
