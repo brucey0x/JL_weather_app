@@ -1,8 +1,10 @@
 # Intro
 
-Creating a weather app following this tutorial from [Jonah Lawrence](https://www.youtube.com/watch?v=WZNG8UomjSI).
+Creating a weather app inspired by this tutorial from [Jonah Lawrence](https://www.youtube.com/watch?v=WZNG8UomjSI).
 
-I'm going to use Typescript for the first time and try some basic typing.
+This has been my first time using Typescript and using a local server to build using Typescript.
+
+I'm incorporating the OpenWeather, Google Maps and Unsplash APIs.
 
 ## How I've set up the project
 
