@@ -16,11 +16,11 @@
     "license": "ISC",
     "devDependencies": {
         "@types/google.maps": "^3.54.1",
+        "@types/node": "^20.6.3",
         "chokidar-cli": "^3.0.0",
         "ncp": "^2.0.0",
         "prettier": "^3.0.3",
         "tsc-watch": "^6.0.4",
-        "typescript": "^5.2.2",
-        "unsplash-js": "^7.0.18"
+        "typescript": "^5.2.2"
     }
 }

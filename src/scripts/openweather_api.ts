@@ -13,13 +13,17 @@ export type WeatherData = {
     name: string
 } | null
 
-const openWeatherApiKey: string = "4eabcfa5d810a9526b0d67462eb579ae"
+let apiKey: string = ""
+if (process.env.OPEN_WEATHER_API_KEY) {
+    apiKey = process.env.OPEN_WEATHER_API_KEY
+}
+console.log(apiKey)
 
 async function getCoordinates(city: string): Promise<Coordinates> {
     let coordinates: Coordinates = null
 
     try {
-        let owGeoApiEndpoint: string = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${openWeatherApiKey}`
+        let owGeoApiEndpoint: string = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`
         const response = await fetch(owGeoApiEndpoint)
         if (!response.ok) {
             throw new Error("Network error")
@@ -39,7 +43,7 @@ async function getCoordinates(city: string): Promise<Coordinates> {
 async function getWeather(coordinates: Coordinates): Promise<WeatherData> {
     let weatherData: any = {}
     if (coordinates) {
-        let owWeatherApiEndpoint2: string = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates[0]}&lon=${coordinates[1]}&units=metric&appid=${openWeatherApiKey}`
+        let owWeatherApiEndpoint2: string = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates[0]}&lon=${coordinates[1]}&units=metric&appid=${apiKey}`
 
         try {
             const response = await fetch(owWeatherApiEndpoint2)

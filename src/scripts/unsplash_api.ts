@@ -18,8 +18,13 @@ export async function upgradeBackgroundImage(
     searchQuery: string
 ): Promise<any> {
     try {
-        const clientID: string = "R3bOh6LdEqwZuKJ1IB_hKqpvNPJJ4MNeMSpI4ziHbpU"
-        const apiEndpoint: string = `https://api.unsplash.com/photos/random?query=${searchQuery}&orientation=landscape&client_id=${clientID}`
+        let apiKey: string = ""
+        if (process.env.UNSPLASH_API_KEY) {
+            apiKey = process.env.UNSPLASH_API_KEY
+        }
+        console.log(apiKey)
+
+        const apiEndpoint: string = `https://api.unsplash.com/photos/random?query=${searchQuery}&orientation=landscape&client_id=${apiKey}`
 
         const response = await fetch(apiEndpoint)
         if (!response.ok) {

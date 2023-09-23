@@ -1,4 +1,8 @@
-const apiKey: string = `AIzaSyAW8FuZH2M0r3cAvk1xSb6XhOIrhQjE_go`
+let apiKey: string = ""
+if (process.env.GOOGLE_MAPS_API_KEY) {
+    apiKey = process.env.GOOGLE_MAPS_API_KEY
+}
+console.log(apiKey)
 
 const googleMapsApiEndpoint: string = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=Function.prototype`
 
