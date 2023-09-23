@@ -44,9 +44,5 @@ export async function initAutocomplete(
             console.log("No details available for the selected place.")
             return
         }
-
-        let fullCityName = place.name // Full city name, may include state and country
-        let firstWordOfCityName = fullCityName.split(" ")[0] // Extract the first word
-        console.log(`User searched for: ${firstWordOfCityName}`)
     })
 }

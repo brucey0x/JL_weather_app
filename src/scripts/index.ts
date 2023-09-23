@@ -40,15 +40,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (searchBarElement) {
         let inputElement = searchBarElement as HTMLInputElement
         console.log(inputElement)
-
         initAutocomplete(inputElement)
     }
 })
 
+function prepareSearchQuery(query: string) {
+    let firstWord = query.split(",")[0]
+    return firstWord.charAt(0).toUpperCase() + firstWord.slice(1)
+}
+
 async function search(query: string) {
-    upgradeBackgroundImage(query)
-    let weather: WeatherData = await searchWeather(query)
-    if (weather && weather["name"] === query) {
+    const cityQuery = prepareSearchQuery(query)
+    upgradeBackgroundImage(cityQuery)
+    let weather: WeatherData = await searchWeather(cityQuery)
+    if (weather && weather["name"] === cityQuery) {
         if (cityElement) cityElement.innerText = `Weather in ${weather["name"]}`
         if (tempElement)
             tempElement.innerText = `${weather["main"].temp}° degrees`
@@ -61,4 +66,5 @@ async function search(query: string) {
     } else {
         alert("City not recognized. Try again.")
     }
+    if (searchBarElement as HTMLInputElement) searchBarElement.value = ""
 }
