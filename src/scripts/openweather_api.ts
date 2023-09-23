@@ -19,7 +19,7 @@ async function getCoordinates(city: string): Promise<Coordinates> {
     let coordinates: Coordinates = null
 
     try {
-        let owGeoApiEndpoint: string = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${openWeatherApiKey}`
+        let owGeoApiEndpoint: string = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${openWeatherApiKey}`
         const response = await fetch(owGeoApiEndpoint)
         if (!response.ok) {
             throw new Error("Network error")
