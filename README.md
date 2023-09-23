@@ -35,7 +35,9 @@ I'm going to use Typescript for the first time and try some basic typing.
 
 -   [x] Limit the search to only searchable cities.
 
--   [ ] Add drop-down to search field to ensure that only cities are selected.
+-   [x] Add drop-down to search field to ensure that only cities are selected.
+
+-   [x] Made dropdown selectable by clicking and pressing enter.
 
 -   [ ] Move API key to separate file that's included in `.gitignore` and that I filter from the repo that I've already pushed.
 

@@ -40,7 +40,6 @@ async function getWeather(coordinates: Coordinates): Promise<WeatherData> {
     let weatherData: any = {}
     if (coordinates) {
         let owWeatherApiEndpoint2: string = `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates[0]}&lon=${coordinates[1]}&units=metric&appid=${openWeatherApiKey}`
-        console.log(`Weather Endpoint 2.5 is ${owWeatherApiEndpoint2}`)
 
         try {
             const response = await fetch(owWeatherApiEndpoint2)

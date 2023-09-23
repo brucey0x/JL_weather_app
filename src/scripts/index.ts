@@ -21,25 +21,29 @@ const windElement: DomElement = document.querySelector(".wind")
 
 // eventListeners
 searchBarElement?.addEventListener("keydown", (key: KeyboardEvent) => {
-    if (key.key === "Enter" && searchBarElement) {
-        let inputValue: string = inputElement.value
-        search(inputValue)
+    if (key.key === "Enter") {
+        let inputValue = getInputValue()
+        if (inputValue) search(inputValue)
     }
 })
 
 searchBarButton?.addEventListener("click", () => {
-    if (searchBarElement) {
-        let inputValue: string = inputElement.value
-        search(inputValue)
-    }
+    let inputValue = getInputValue()
+    if (inputValue) search(inputValue)
 })
 
 document.addEventListener("DOMContentLoaded", () => {
     if (searchBarElement) {
-        console.log(inputElement)
-        initAutocomplete(inputElement)
+        initAutocomplete(inputElement, search)
     }
 })
+
+function getInputValue(): string | null {
+    let inputValue: string = inputElement.value
+    console.log(`inputValue is ${inputValue}`)
+    if (inputValue) return inputValue
+    return null
+}
 
 function prepareSearchQuery(query: string) {
     let firstWord = query.split(",")[0]

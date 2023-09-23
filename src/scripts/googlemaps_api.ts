@@ -2,8 +2,6 @@ const apiKey: string = `AIzaSyAW8FuZH2M0r3cAvk1xSb6XhOIrhQjE_go`
 
 const googleMapsApiEndpoint: string = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=Function.prototype`
 
-// const googleMapsApiEndpoint: string = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`
-
 function loadGoogleMapsApi(): Promise<void> {
     return new Promise((resolve) => {
         const script: HTMLScriptElement = document.createElement("script")
@@ -19,7 +17,8 @@ function loadGoogleMapsApi(): Promise<void> {
 }
 
 export async function initAutocomplete(
-    inputElement: HTMLInputElement
+    inputElement: HTMLInputElement,
+    searchFunction: (query: string) => void
 ): Promise<void> {
     console.log("Autocomplete initialized")
     await loadGoogleMapsApi()
@@ -38,8 +37,10 @@ export async function initAutocomplete(
     autocomplete.addListener("place_changed", () => {
         const place: any = autocomplete.getPlace()
 
-        if (!place.geometry || !place.types.includes("locality")) {
-            // User entered the name of a non-city or place not in the autocomplete list
+        if (place.geometry && place.types.includes("locality")) {
+            const query = place.formatted_address
+            searchFunction(query) // This will call the `search` function you defined in index.ts
+        } else {
             console.log("No details available for the selected place.")
             return
         }
