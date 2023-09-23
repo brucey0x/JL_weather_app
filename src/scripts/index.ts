@@ -1,3 +1,4 @@
+import { initAutocomplete } from "./googlemaps_api.js"
 import { searchWeather, WeatherData } from "./openweather_api.js"
 import { upgradeBackgroundImage } from "./unsplash_api.js"
 
@@ -7,6 +8,7 @@ type DomElement = HTMLElement | null
 /// Search elements
 const searchBarElement: DomElement = document.querySelector(".search-bar")
 const searchBarButton: DomElement = document.querySelector(".search-bar-button")
+let inputElement = searchBarElement as HTMLInputElement
 
 /// Weather elements
 const cityElement: DomElement = document.querySelector(".city")
@@ -20,7 +22,7 @@ const windElement: DomElement = document.querySelector(".wind")
 // eventListeners
 searchBarElement?.addEventListener("keydown", (key: KeyboardEvent) => {
     if (key.key === "Enter" && searchBarElement) {
-        let inputValue: string = (searchBarElement as HTMLInputElement).value
+        let inputValue: string = inputElement.value
         search(inputValue)
         ;(searchBarElement as HTMLInputElement).value = ""
     }
@@ -28,9 +30,18 @@ searchBarElement?.addEventListener("keydown", (key: KeyboardEvent) => {
 
 searchBarButton?.addEventListener("click", () => {
     if (searchBarElement) {
-        let inputValue: string = (searchBarElement as HTMLInputElement).value
+        let inputValue: string = inputElement.value
         search(inputValue)
         ;(searchBarElement as HTMLInputElement).value = ""
+    }
+})
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (searchBarElement) {
+        let inputElement = searchBarElement as HTMLInputElement
+        console.log(inputElement)
+
+        initAutocomplete(inputElement)
     }
 })
 
@@ -44,7 +55,7 @@ async function search(query: string) {
         if (weatherDescriptionElement)
             weatherDescriptionElement.innerText = `${weather["weather"][0].main}`
         if (humidityElement)
-            humidityElement.innerText = `${weather["main"].humidity}%`
+            humidityElement.innerText = `Humidity: ${weather["main"].humidity}%`
         if (windElement)
             windElement.innerText = `Wind speed: ${weather["wind"].speed}km/h`
     } else {
