@@ -1,4 +1,4 @@
-import { getCoordinates } from "./openweather_api.js"
+import { searchWeather } from "./openweather_api.js"
 import { upgradeBackgroundImage } from "./unsplash_api.js"
 
 // Read DOM
@@ -36,7 +36,7 @@ function search(query: string) {
     console.log(`Search for ${query} executed.`)
     upgradeBackgroundImage(query)
     if (cityElement) cityElement.innerText = `Weather in ${query}`
-    let currentTemp = getCoordinates(query)
-    console.log(currentTemp)
+    let currentTemp = searchWeather(query)
+    console.log(`CurrentTemp is ${currentTemp} of type ${typeof currentTemp}.`)
     if (tempElement) tempElement.innerText = `${currentTemp}° degrees`
 }
