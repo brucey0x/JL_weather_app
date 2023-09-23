@@ -10,6 +10,7 @@ export type WeatherData = {
     wind: {
         speed: number
     }
+    name: string
 } | null
 
 const openWeatherApiKey: string = "4eabcfa5d810a9526b0d67462eb579ae"

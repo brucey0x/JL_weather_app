@@ -31,13 +31,15 @@ I'm going to use Typescript for the first time and try some basic typing.
 
 -   [x] Make search query also update the Unsplash API call.
 
+-   [x] Update city text based on API data rather than search query.
+
 -   [ ] Add drop-down to search field to ensure that only cities are selected.
 
--   [ ] Limit the search to only searchable cities.
+-   [x] Limit the search to only searchable cities.
 
 -   [ ] Move API key to separate file that's included in `.gitignore` and that I filter from the repo that I've already pushed.
 
 ### Bugs
 
--   [ ] Update temperature on homepage
--   [ ] When no image is loaded, there shouldn't be any link on the background image.
+-   [x] Update temperature on homepage
+-   [x] When no image is loaded, there shouldn't be any link on the background image.

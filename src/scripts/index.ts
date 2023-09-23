@@ -16,13 +16,6 @@ const weatherDescriptionElement: DomElement = document.querySelector(
 )
 const humidityElement: DomElement = document.querySelector(".humidity")
 const windElement: DomElement = document.querySelector(".wind")
-const weatherElements = [
-    cityElement,
-    tempElement,
-    weatherDescriptionElement,
-    humidityElement,
-    windElement
-]
 
 // eventListeners
 searchBarElement?.addEventListener("keydown", (key: KeyboardEvent) => {
@@ -43,13 +36,9 @@ searchBarButton?.addEventListener("click", () => {
 
 async function search(query: string) {
     upgradeBackgroundImage(query)
-    if (cityElement) cityElement.innerText = `Weather in ${query}`
     let weather: WeatherData = await searchWeather(query)
-    console.log(weather)
-    if (weather) {
-        console.log(
-            `CurrentTemp is ${weather["main"].temp} of type ${typeof weather}.`
-        )
+    if (weather && weather["name"] === query) {
+        if (cityElement) cityElement.innerText = `Weather in ${weather["name"]}`
         if (tempElement)
             tempElement.innerText = `${weather["main"].temp}° degrees`
         if (weatherDescriptionElement)
@@ -58,5 +47,7 @@ async function search(query: string) {
             humidityElement.innerText = `${weather["main"].humidity}%`
         if (windElement)
             windElement.innerText = `Wind speed: ${weather["wind"].speed}km/h`
+    } else {
+        alert("City not recognized. Try again.")
     }
 }
