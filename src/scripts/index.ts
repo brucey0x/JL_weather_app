@@ -1,18 +1,28 @@
-import { searchWeather } from "./openweather_api.js"
+import { searchWeather, WeatherData } from "./openweather_api.js"
 import { upgradeBackgroundImage } from "./unsplash_api.js"
 
+type DomElement = HTMLElement | null
+
 // Read DOM
-const searchBarElement: HTMLElement | null =
-    document.querySelector(".search-bar")
-const searchBarButton: HTMLElement | null =
-    document.querySelector(".search-bar-button")
-const cityElement: HTMLHeadingElement | null = document.querySelector(".city")
-const tempElement: HTMLElement | null = document.querySelector(".temp")
-const weatherDescriptionButton: HTMLElement | null = document.querySelector(
+/// Search elements
+const searchBarElement: DomElement = document.querySelector(".search-bar")
+const searchBarButton: DomElement = document.querySelector(".search-bar-button")
+
+/// Weather elements
+const cityElement: DomElement = document.querySelector(".city")
+const tempElement: DomElement = document.querySelector(".temp")
+const weatherDescriptionElement: DomElement = document.querySelector(
     ".weather-description"
 )
-const humidityElement: HTMLElement | null = document.querySelector(".humidity")
-const windElement: HTMLElement | null = document.querySelector(".wind")
+const humidityElement: DomElement = document.querySelector(".humidity")
+const windElement: DomElement = document.querySelector(".wind")
+const weatherElements = [
+    cityElement,
+    tempElement,
+    weatherDescriptionElement,
+    humidityElement,
+    windElement
+]
 
 // eventListeners
 searchBarElement?.addEventListener("keydown", (key: KeyboardEvent) => {
@@ -31,12 +41,22 @@ searchBarButton?.addEventListener("click", () => {
     }
 })
 
-// Create a function that searches the weather API. Need to export the search to pull the right Unsplash image for the background.
-function search(query: string) {
-    console.log(`Search for ${query} executed.`)
+async function search(query: string) {
     upgradeBackgroundImage(query)
     if (cityElement) cityElement.innerText = `Weather in ${query}`
-    let currentTemp = searchWeather(query)
-    console.log(`CurrentTemp is ${currentTemp} of type ${typeof currentTemp}.`)
-    if (tempElement) tempElement.innerText = `${currentTemp}° degrees`
+    let weather: WeatherData = await searchWeather(query)
+    console.log(weather)
+    if (weather) {
+        console.log(
+            `CurrentTemp is ${weather["main"].temp} of type ${typeof weather}.`
+        )
+        if (tempElement)
+            tempElement.innerText = `${weather["main"].temp}° degrees`
+        if (weatherDescriptionElement)
+            weatherDescriptionElement.innerText = `${weather["weather"][0].main}`
+        if (humidityElement)
+            humidityElement.innerText = `${weather["main"].humidity}%`
+        if (windElement)
+            windElement.innerText = `Wind speed: ${weather["wind"].speed}km/h`
+    }
 }

@@ -1,36 +1,44 @@
 {
-    "coord": { "lon": 4.4778, "lat": 51.9244 },
+    "coord": {
+        "lon": -0.1275,
+        "lat": 51.5072
+    },
     "weather": [
         {
-            "id": 500,
-            "main": "Rain",
-            "description": "light rain",
-            "icon": "10n"
+            "id": 803,
+            "main": "Clouds",
+            "description": "broken clouds",
+            "icon": "04d"
         }
     ],
     "base": "stations",
     "main": {
-        "temp": 12.68,
-        "feels_like": 12.33,
-        "temp_min": 11.64,
-        "temp_max": 13.98,
-        "pressure": 1003,
-        "humidity": 89
+        "temp": 10.79,
+        "feels_like": 10.22,
+        "temp_min": 9.35,
+        "temp_max": 12.77,
+        "pressure": 1014,
+        "humidity": 88
     },
     "visibility": 10000,
-    "wind": { "speed": 1.54, "deg": 210 },
-    "rain": { "1h": 0.56 },
-    "clouds": { "all": 100 },
-    "dt": 1695408607,
-    "sys": {
-        "type": 1,
-        "id": 1541,
-        "country": "NL",
-        "sunrise": 1695360442,
-        "sunset": 1695404559
+    "wind": {
+        "speed": 3.6,
+        "deg": 250,
+        "gust": 8.75
     },
-    "timezone": 7200,
-    "id": 2747891,
-    "name": "Rotterdam",
+    "clouds": {
+        "all": 54
+    },
+    "dt": 1695456682,
+    "sys": {
+        "type": 2,
+        "id": 2075535,
+        "country": "GB",
+        "sunrise": 1695448049,
+        "sunset": 1695491918
+    },
+    "timezone": 3600,
+    "id": 2643743,
+    "name": "London",
     "cod": 200
 }
