@@ -30,7 +30,7 @@ export function upgradeBackgroundImage(searchQuery: string) {
             console.log(response.json)
             return response.json()
         })
-        .then(function (jsonData) {
+        .then((jsonData) => {
             if (imageElement)
                 imageElement.setAttribute("src", jsonData.urls.regular)
             if (imageLink) {

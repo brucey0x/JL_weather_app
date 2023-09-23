@@ -23,10 +23,16 @@ I'm going to use Typescript for the first time and try some basic typing.
 
 -   Run a Live Server on `./build/index.html`
 
-## Todos
+## Feature roadmap
 
--   [ ] Get Unsplash image URL to insert in the right element so that the other elements remain visible.
+### General
 
--   [ ] Make search query also update the Unsplash API call.
+-   [x] Get Unsplash image URL to insert in the right element so that the other elements remain visible.
+
+-   [x] Make search query also update the Unsplash API call.
 
 -   [ ] Move API key to separate file that's included in `.gitignore` and that I filter from the repo that I've already pushed.
+
+### Bugs
+
+-   [ ] Update temperature on homepage
