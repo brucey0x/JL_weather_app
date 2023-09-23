@@ -24,7 +24,6 @@ searchBarElement?.addEventListener("keydown", (key: KeyboardEvent) => {
     if (key.key === "Enter" && searchBarElement) {
         let inputValue: string = inputElement.value
         search(inputValue)
-        ;(searchBarElement as HTMLInputElement).value = ""
     }
 })
 
@@ -32,13 +31,11 @@ searchBarButton?.addEventListener("click", () => {
     if (searchBarElement) {
         let inputValue: string = inputElement.value
         search(inputValue)
-        ;(searchBarElement as HTMLInputElement).value = ""
     }
 })
 
 document.addEventListener("DOMContentLoaded", () => {
     if (searchBarElement) {
-        let inputElement = searchBarElement as HTMLInputElement
         console.log(inputElement)
         initAutocomplete(inputElement)
     }
@@ -66,5 +63,8 @@ async function search(query: string) {
     } else {
         alert("City not recognized. Try again.")
     }
-    if (searchBarElement as HTMLInputElement) searchBarElement.value = ""
+    // Try to clear the input field and fire an input event
+    inputElement.value = ""
+    const event = new Event("input", { bubbles: true, cancelable: true })
+    inputElement.dispatchEvent(event)
 }

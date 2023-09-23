@@ -10,7 +10,6 @@ function loadGoogleMapsApi(): Promise<void> {
         console.log(script)
         script.type = "module"
         script.src = googleMapsApiEndpoint
-        script.async = true
         script.defer = true
         script.onload = () => {
             resolve()
