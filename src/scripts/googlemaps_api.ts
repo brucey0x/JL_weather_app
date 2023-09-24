@@ -21,7 +21,7 @@ async function fetchApiKey(): Promise<void> {
 async function loadGoogleMapsApi(): Promise<void> {
     await fetchApiKey()
 
-    if (!fetchApiKey) {
+    if (!apiKey) {
         console.error("API key not found")
         return
     }
