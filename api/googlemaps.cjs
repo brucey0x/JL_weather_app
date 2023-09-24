@@ -1,4 +1,4 @@
-module.exports = (req, res) => {
+export default (req, res) => {
     console.log(
         "Checking environment variable:",
         process.env.GOOGLE_MAPS_API_KEY
