@@ -2,7 +2,7 @@ let apiKey: string = ""
 
 async function fetchApiKey(): Promise<void> {
     try {
-        const res = await fetch("/api/getGoogleMapsApiKey")
+        const res = await fetch("/api/googlemaps")
         const data = await res.json()
         apiKey = data.apiKey
     } catch (error) {
@@ -30,13 +30,13 @@ async function loadGoogleMapsApi(): Promise<void> {
 
     return new Promise((resolve) => {
         const script: HTMLScriptElement = document.createElement("script")
-        console.log(script)
         script.type = "module"
         script.src = googleMapsApiEndpoint
         script.defer = true
         script.onload = () => {
             resolve()
         }
+        console.log(script)
         document.head.appendChild(script)
     })
 }
