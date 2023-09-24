@@ -1,12 +1,33 @@
 let apiKey: string = ""
-if (process.env.GOOGLE_MAPS_API_KEY) {
-    apiKey = process.env.GOOGLE_MAPS_API_KEY
+
+async function fetchApiKey(): Promise<void> {
+    try {
+        const res = await fetch("/api/getGoogleMapsApiKey")
+        const data = await res.json()
+        apiKey = data.apiKey
+    } catch (error) {
+        console.error("Error fetching API key:", error)
+    }
 }
-console.log(apiKey)
 
-const googleMapsApiEndpoint: string = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=Function.prototype`
+// let apiKey: string = ""
+// if (process.env.GOOGLE_MAPS_API_KEY) {
+//     apiKey = process.env.GOOGLE_MAPS_API_KEY
+// }
+// console.log(apiKey)
 
-function loadGoogleMapsApi(): Promise<void> {
+// const googleMapsApiEndpoint: string = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=Function.prototype`
+
+async function loadGoogleMapsApi(): Promise<void> {
+    await fetchApiKey()
+
+    if (!fetchApiKey) {
+        console.error("API key not found")
+        return
+    }
+
+    const googleMapsApiEndpoint: string = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=Function.prototype`
+
     return new Promise((resolve) => {
         const script: HTMLScriptElement = document.createElement("script")
         console.log(script)
