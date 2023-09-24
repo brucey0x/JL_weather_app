@@ -1,7 +1,7 @@
 // ./api/unsplash.js
 import fetch from "node-fetch"
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
     const apiKey = process.env.UNSPLASH_API_KEY
     const searchQuery = req.query.searchQuery
 

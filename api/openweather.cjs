@@ -1,7 +1,7 @@
 // /api/openweather.js
 import fetch from "node-fetch"
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
     const apiKey = process.env.OPEN_WEATHER_API_KEY
     const city = req.query.city
 
