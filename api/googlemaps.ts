@@ -1,4 +1,6 @@
-export default (req, res) => {
+import type { VercelRequest, VercelResponse } from "@vercel/node"
+
+export default (req: VercelRequest, res: VercelResponse) => {
     console.log(
         "Checking environment variable:",
         process.env.GOOGLE_MAPS_API_KEY

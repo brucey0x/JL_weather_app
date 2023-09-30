@@ -52,8 +52,16 @@ function prepareSearchQuery(query: string) {
 
 async function search(query: string) {
     const cityQuery = prepareSearchQuery(query)
+    console.log(`Search query initialized for city: ${cityQuery}`)
+
     upgradeBackgroundImage(cityQuery)
     let weather: WeatherData = await searchWeather(cityQuery)
+    if (!weather) {
+        console.log("Weather data is unavailable.")
+        return
+    }
+    console.log(`OW weather returned is ${weather}`)
+
     if (weather && weather["name"] === cityQuery) {
         if (cityElement) cityElement.innerText = `Weather in ${weather["name"]}`
         if (tempElement)

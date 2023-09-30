@@ -26,7 +26,7 @@ async function loadGoogleMapsApi(): Promise<void> {
         return
     }
 
-    const googleMapsApiEndpoint: string = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=Function.prototype`
+    const googleMapsApiEndpoint: string = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback`
 
     return new Promise((resolve) => {
         const script: HTMLScriptElement = document.createElement("script")
@@ -36,7 +36,7 @@ async function loadGoogleMapsApi(): Promise<void> {
         script.onload = () => {
             resolve()
         }
-        console.log(script)
+        console.log(`Google Maps script is: ${script}`)
         document.head.appendChild(script)
     })
 }
@@ -56,7 +56,7 @@ export async function initAutocomplete(
         inputElement,
         options
     )
-    console.log(autocomplete)
+    console.log(`Autocomplete is ${autocomplete}`)
 
     // Event listener for place changes
     autocomplete.addListener("place_changed", () => {
@@ -64,6 +64,7 @@ export async function initAutocomplete(
 
         if (place.geometry && place.types.includes("locality")) {
             const query = place.formatted_address
+            console.log(`Google search query is ${query}`)
             searchFunction(query) // This will call the `search` function you defined in index.ts
         } else {
             console.log("No details available for the selected place.")
