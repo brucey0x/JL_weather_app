@@ -41,15 +41,15 @@ I'm incorporating the OpenWeather, Google Maps and Unsplash APIs.
 
 -   [x] Made dropdown selectable by clicking and pressing enter.
 
--   [ ] Move API key to separate file that's included in `.gitignore`
+-   [x] Move API key to separate file that's included in `.gitignore`
 
--   [ ] Filter keys from GH repo that I'd already publicized.
+-   [x] Reset API keys that I'd previously publicized
 
--   [ ] Add serverless API for all possible API calls and test them rigorously.
+-   [x] Add serverless API for all possible API calls and test them rigorously.
 
 ### Bugs
 
 -   [x] Update temperature on homepage
 -   [x] When no image is loaded, there shouldn't be any link on the background image.
--   [ ] Avoid double-call of search query when selecting city from Google Maps API instead of typing.
+-   [x] Avoid double-call of search query when selecting city from Google Maps API instead of typing.
 -   [ ] Solve `callback` complaint of Google Maps API without integrating a map on the site.
