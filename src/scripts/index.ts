@@ -23,11 +23,9 @@ const windElement: DomElement = document.querySelector(".wind")
 searchBarElement?.addEventListener("keydown", async (key: KeyboardEvent) => {
     if (key.key === "Enter") {
         let inputValue = getInputValue()
-        // if (inputValue) search(inputValue)
         if (inputValue) {
             try {
-                const verifiedInput = await verifyUserInput(inputValue)
-                search(verifiedInput)
+                await verifyUserInput(inputValue, search, inputElement)
             } catch (error) {
                 console.error(error)
             }
@@ -37,11 +35,9 @@ searchBarElement?.addEventListener("keydown", async (key: KeyboardEvent) => {
 
 searchBarButton?.addEventListener("click", async () => {
     let inputValue = getInputValue()
-    // if (inputValue) search(inputValue)
     if (inputValue) {
         try {
-            const verifiedInput = await verifyUserInput(inputValue)
-            search(verifiedInput)
+            await verifyUserInput(inputValue, search, inputElement)
         } catch (error) {
             console.error(error)
         }
@@ -56,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function getInputValue(): string | null {
     let inputValue: string = inputElement.value
-    console.log(`inputValue is ${inputValue}`)
     if (inputValue) return inputValue
     return null
 }
@@ -76,7 +71,6 @@ async function search(query: string) {
         console.log("Weather data is unavailable.")
         return
     }
-    console.log(`OW weather returned is ${weather}`)
 
     if (weather && weather["name"] === cityQuery) {
         if (cityElement) cityElement.innerText = `Weather in ${weather["name"]}`
@@ -91,8 +85,4 @@ async function search(query: string) {
     } else {
         alert("City not recognized. Try again.")
     }
-    // Try to clear the input field and fire an input event
-    inputElement.value = ""
-    const event = new Event("input", { bubbles: true, cancelable: true })
-    inputElement.dispatchEvent(event)
 }

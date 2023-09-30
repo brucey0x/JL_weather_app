@@ -1,9 +1,5 @@
 /// <reference types="@types/google.maps" />
-import {
-    AutocompleteService,
-    PlacesServiceStatus,
-    QueryAutocompletionRequest
-} from "google.maps"
+import { clearInput } from "./utils.js"
 
 let apiKey: string = ""
 
@@ -56,48 +52,54 @@ export async function initAutocomplete(
         inputElement,
         options
     )
-    console.log("Autocomplete is: ", autocomplete)
 
     // Event listener for place changes
     autocomplete.addListener("place_changed", () => {
-        const place: any = autocomplete.getPlace()
+        let place: any = autocomplete.getPlace()
 
         if (place.geometry && place.types.includes("locality")) {
             const query = place.formatted_address
             console.log(`Google search query is: `, query)
             searchFunction(query) // This will call the `search` function you defined in index.ts
+            clearInput(inputElement)
         } else {
-            console.log("No details available for the selected place.")
             return
         }
     })
 }
 
 // Perform a lookup based on the user's input and select the best match
-export async function verifyUserInput(inputValue: string): Promise<string> {
+export async function verifyUserInput(
+    inputValue: string,
+    search: (query: string) => Promise<void>,
+    inputElement: HTMLInputElement
+): Promise<void> {
     const service = new google.maps.places.AutocompleteService()
 
     return new Promise((resolve, reject) => {
         // Explicitly specify the type of request
-        const request: google.maps.places.QueryAutocompletionRequest = { input: inputValue };
+        const request: google.maps.places.QueryAutocompletionRequest = {
+            input: inputValue
+        }
 
         // The 'as any' type assertion effectively turns off type-checking for this block
         // Use it if you're sure the API will handle it appropriately, even if TypeScript does not
-        service.getQueryPredictions(request as any, function (predictions, status) {
+        service.getQueryPredictions(request, (predictions, status) => {
             if (
                 status === google.maps.places.PlacesServiceStatus.OK &&
                 predictions
             ) {
                 // For demonstration, we take the first prediction as the best match.
                 // You can add more complex logic here if needed.
-                const bestMatch = predictions[0]?.description;
+                const bestMatch = predictions[0]?.description
                 if (bestMatch) {
-                    resolve(bestMatch);
-                    return;
+                    search(bestMatch)
+                    clearInput(inputElement)
+                    resolve()
+                    return
                 }
             }
-            reject("No match found");
-        });
-    });
+            reject("No match found when calling verifying input.")
+        })
+    })
 }
-
