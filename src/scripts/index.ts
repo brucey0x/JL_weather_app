@@ -1,5 +1,5 @@
-import { initAutocomplete } from "./googlemaps_api.js"
-import { searchWeather, WeatherData } from "./openweather_api.js"
+import { initAutocomplete, verifyUserInput } from "./googlemaps_api.js"
+import { WeatherData, searchWeather } from "./openweather_api.js"
 import { upgradeBackgroundImage } from "./unsplash_api.js"
 
 type DomElement = HTMLElement | null
@@ -20,16 +20,32 @@ const humidityElement: DomElement = document.querySelector(".humidity")
 const windElement: DomElement = document.querySelector(".wind")
 
 // eventListeners
-searchBarElement?.addEventListener("keydown", (key: KeyboardEvent) => {
+searchBarElement?.addEventListener("keydown", async (key: KeyboardEvent) => {
     if (key.key === "Enter") {
         let inputValue = getInputValue()
         // if (inputValue) search(inputValue)
+        if (inputValue) {
+            try {
+                const verifiedInput = await verifyUserInput(inputValue)
+                search(verifiedInput)
+            } catch (error) {
+                console.error(error)
+            }
+        }
     }
 })
 
-searchBarButton?.addEventListener("click", () => {
+searchBarButton?.addEventListener("click", async () => {
     let inputValue = getInputValue()
     // if (inputValue) search(inputValue)
+    if (inputValue) {
+        try {
+            const verifiedInput = await verifyUserInput(inputValue)
+            search(verifiedInput)
+        } catch (error) {
+            console.error(error)
+        }
+    }
 })
 
 document.addEventListener("DOMContentLoaded", () => {

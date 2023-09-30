@@ -1,4 +1,9 @@
-import {} from "google.maps"
+/// <reference types="@types/google.maps" />
+import {
+    AutocompleteService,
+    PlacesServiceStatus,
+    QueryAutocompletionRequest
+} from "google.maps"
 
 let apiKey: string = ""
 
@@ -73,23 +78,26 @@ export async function verifyUserInput(inputValue: string): Promise<string> {
     const service = new google.maps.places.AutocompleteService()
 
     return new Promise((resolve, reject) => {
-        service.getQueryPredictions(
-            { input: inputValue, types: ["(cities)"] },
-            function (predictions, status) {
-                if (
-                    status === google.maps.places.PlacesServiceStatus.OK &&
-                    predictions
-                ) {
-                    // For demonstration, we take the first prediction as the best match.
-                    // You can add more complex logic here if needed.
-                    const bestMatch = predictions[0]?.description
-                    if (bestMatch) {
-                        resolve(bestMatch)
-                        return
-                    }
+        // Explicitly specify the type of request
+        const request: google.maps.places.QueryAutocompletionRequest = { input: inputValue };
+
+        // The 'as any' type assertion effectively turns off type-checking for this block
+        // Use it if you're sure the API will handle it appropriately, even if TypeScript does not
+        service.getQueryPredictions(request as any, function (predictions, status) {
+            if (
+                status === google.maps.places.PlacesServiceStatus.OK &&
+                predictions
+            ) {
+                // For demonstration, we take the first prediction as the best match.
+                // You can add more complex logic here if needed.
+                const bestMatch = predictions[0]?.description;
+                if (bestMatch) {
+                    resolve(bestMatch);
+                    return;
                 }
-                reject("No match found")
             }
-        )
-    })
+            reject("No match found");
+        });
+    });
 }
+
