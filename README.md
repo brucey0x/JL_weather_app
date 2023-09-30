@@ -51,3 +51,5 @@ I'm incorporating the OpenWeather, Google Maps and Unsplash APIs.
 
 -   [x] Update temperature on homepage
 -   [x] When no image is loaded, there shouldn't be any link on the background image.
+-   [ ] Avoid double-call of search query when selecting city from Google Maps API instead of typing.
+-   [ ] Solve `callback` complaint of Google Maps API without integrating a map on the site.
