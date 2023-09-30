@@ -22,8 +22,6 @@ export async function searchWeather(city: string): Promise<WeatherData> {
             throw new Error("Network error")
         }
         const weatherData = await response.json()
-        console.log("Response from OW server: ", weatherData)
-
         return weatherData
     } catch (error) {
         console.error("There was a problem with the fetch operation:", error)

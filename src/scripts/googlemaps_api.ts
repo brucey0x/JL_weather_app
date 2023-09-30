@@ -1,3 +1,5 @@
+import {} from "google.maps"
+
 let apiKey: string = ""
 
 async function fetchApiKey(): Promise<void> {
@@ -10,12 +12,6 @@ async function fetchApiKey(): Promise<void> {
     }
 }
 
-// let apiKey: string = ""
-// if (process.env.GOOGLE_MAPS_API_KEY) {
-//     apiKey = process.env.GOOGLE_MAPS_API_KEY
-// }
-// console.log(apiKey)
-
 // const googleMapsApiEndpoint: string = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=Function.prototype`
 
 async function loadGoogleMapsApi(): Promise<void> {
@@ -26,7 +22,7 @@ async function loadGoogleMapsApi(): Promise<void> {
         return
     }
 
-    const googleMapsApiEndpoint: string = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback`
+    const googleMapsApiEndpoint: string = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&language=en&callback`
 
     return new Promise((resolve) => {
         const script: HTMLScriptElement = document.createElement("script")
@@ -36,7 +32,6 @@ async function loadGoogleMapsApi(): Promise<void> {
         script.onload = () => {
             resolve()
         }
-        console.log(`Google Maps script is: ${script}`)
         document.head.appendChild(script)
     })
 }
@@ -56,7 +51,7 @@ export async function initAutocomplete(
         inputElement,
         options
     )
-    console.log(`Autocomplete is ${autocomplete}`)
+    console.log("Autocomplete is: ", autocomplete)
 
     // Event listener for place changes
     autocomplete.addListener("place_changed", () => {
@@ -64,11 +59,37 @@ export async function initAutocomplete(
 
         if (place.geometry && place.types.includes("locality")) {
             const query = place.formatted_address
-            console.log(`Google search query is ${query}`)
+            console.log(`Google search query is: `, query)
             searchFunction(query) // This will call the `search` function you defined in index.ts
         } else {
             console.log("No details available for the selected place.")
             return
         }
+    })
+}
+
+// Perform a lookup based on the user's input and select the best match
+export async function verifyUserInput(inputValue: string): Promise<string> {
+    const service = new google.maps.places.AutocompleteService()
+
+    return new Promise((resolve, reject) => {
+        service.getQueryPredictions(
+            { input: inputValue, types: ["(cities)"] },
+            function (predictions, status) {
+                if (
+                    status === google.maps.places.PlacesServiceStatus.OK &&
+                    predictions
+                ) {
+                    // For demonstration, we take the first prediction as the best match.
+                    // You can add more complex logic here if needed.
+                    const bestMatch = predictions[0]?.description
+                    if (bestMatch) {
+                        resolve(bestMatch)
+                        return
+                    }
+                }
+                reject("No match found")
+            }
+        )
     })
 }

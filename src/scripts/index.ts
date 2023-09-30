@@ -23,13 +23,13 @@ const windElement: DomElement = document.querySelector(".wind")
 searchBarElement?.addEventListener("keydown", (key: KeyboardEvent) => {
     if (key.key === "Enter") {
         let inputValue = getInputValue()
-        if (inputValue) search(inputValue)
+        // if (inputValue) search(inputValue)
     }
 })
 
 searchBarButton?.addEventListener("click", () => {
     let inputValue = getInputValue()
-    if (inputValue) search(inputValue)
+    // if (inputValue) search(inputValue)
 })
 
 document.addEventListener("DOMContentLoaded", () => {

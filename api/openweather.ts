@@ -14,8 +14,6 @@ export default async (req: VercelRequest, res: VercelResponse) => {
             res.status(404).json({ error: "Failed to fetch city data." })
             return
         }
-        console.log(`geoResponse is:`)
-        console.log(geoResponse)
 
         const geoData: any = await geoResponse.json()
         const { lat, lon } = geoData[0]
@@ -27,8 +25,6 @@ export default async (req: VercelRequest, res: VercelResponse) => {
             res.status(404).json({ error: "Failed to fetch weather data." })
             return
         }
-        console.log(`weatherResponse is:`)
-        console.log(weatherResponse)
 
         const weatherData = await weatherResponse.json()
         res.status(200).json(weatherData)
